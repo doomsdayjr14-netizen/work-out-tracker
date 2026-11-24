@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f3f6ef">
+  <title>Form — Workout & Nutrition</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#" aria-label="Form home"><span class="brand-mark">F</span><span>FORM</span></a>
+    <nav aria-label="Main navigation">
+      <button class="nav-item active" data-view="dashboard"><span>⌂</span>Overview</button>
+      <button class="nav-item" data-view="workout"><span>◫</span>Workout</button>
+      <button class="nav-item" data-view="nutrition"><span>◌</span>Nutrition</button>
+      <button class="nav-item" data-view="history"><span>↗</span>History</button>
+    </nav>
+    <button class="profile" id="profileButton">
+      <span class="avatar">JD</span><span><strong>Jamie Doe</strong><small>Personal plan</small></span>
+    </button>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow" id="todayLabel">TODAY</p>
+        <h1 id="pageTitle">Good morning, Jamie</h1>
+      </div>
+      <div class="header-actions">
+        <button class="icon-button" id="notificationButton" title="Enable progress notifications" aria-label="Enable notifications">♢</button>
+        <button class="primary-button" id="quickStart">+ Start workout</button>
+      </div>
+    </header>
+
+    <section id="dashboard" class="view active">
+      <div class="hero-grid">
+        <article class="hero-card">
+          <div class="hero-copy"><p class="eyebrow">TODAY'S FOCUS</p><h2 id="focusTitle">Upper body strength</h2><p id="focusMeta">6 exercises · 45–60 min</p></div>
+          <div class="progress-ring" style="--p:72"><div><strong>72</strong><span>readiness</span></div></div>
+        </article>
+        <article class="quote-card"><span class="quote-mark">“</span><blockquote>Consistency is the quiet<br>work behind every result.</blockquote></article>
+      </div>
+
+      <div class="section-heading"><div><p class="eyebrow">LIVE SUMMARY</p><h2>Today at a glance</h2></div><span class="status"><i></i>Synced</span></div>
+      <div class="stats-grid">
+        <article class="stat-card"><div class="stat-icon lilac">◒</div><p>Training volume</p><strong id="volumeStat">—</strong><small id="volumeTrend">No workout logged yet</small></article>
+        <article class="stat-card"><div class="stat-icon yellow">⌁</div><p>Nutrition</p><strong id="calorieStat">0 <em>/ 2,200 kcal</em></strong><div class="bar"><i id="calorieBar"></i></div></article>
+        <article class="stat-card"><div class="stat-icon blue">↗</div><p>Weekly streak</p><strong id="streakStat">0 <em>days</em></strong><small>Keep showing up</small></article>
+      </div>
+
+      <div class="section-heading"><div><p class="eyebrow">COMING UP</p><h2>Recommended today</h2></div></div>
+      <div class="recommendation-grid">
+        <article class="recommendation"><div class="exercise-art push-art"><span>5</span></div><div><p>STRENGTH</p><h3>Upper body push</h3><small>Chest · shoulders · triceps</small></div><button class="round-button start-program" data-workout="Upper body push">→</button></article>
+        <article class="recommendation"><div class="exercise-art meal-art"><span>◉</span></div><div><p>NUTRITION</p><h3>Post-workout meal</h3><small id="mealRecommendation">Greek yogurt bowl · 32g protein</small></div><button class="round-button" id="viewMeal">→</button></article>
+      </div>
+    </section>
+
+    <section id="workout" class="view">
+      <div class="workout-layout">
+        <div>
+          <div class="section-heading"><div><p class="eyebrow">ACTIVE SESSION</p><h2 id="activeWorkoutTitle">Choose a workout</h2></div><span class="live-status" id="workoutStatus">Ready</span></div>
+          <div class="exercise-list" id="exerciseList"></div>
+          <button class="primary-button full" id="finishWorkout">Finish workout</button>
+        </div>
+        <aside class="session-panel">
+          <p class="eyebrow">SESSION</p><h2 id="sessionTimer">00:00</h2>
+          <div class="session-metrics"><div><small>Volume</small><strong id="sessionVolume">0 kg</strong></div><div><small>Sets</small><strong id="sessionSets">0</strong></div></div>
+          <h3>Progress</h3><div id="progressFeed" class="progress-feed"><p>No progress alerts yet.</p></div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="nutrition" class="view">
+      <div class="section-heading"><div><p class="eyebrow">DAILY LOG</p><h2>Nutrition</h2></div><button class="secondary-button" id="addMealButton">+ Add meal</button></div>
+      <div class="nutrition-layout">
+        <article class="macro-card"><div class="macro-ring" id="macroRing"><div><strong id="macroCalories">0</strong><small>of 2,200 kcal</small></div></div><div class="macros"><div><span>Protein</span><strong id="proteinTotal">0g</strong></div><div><span>Carbs</span><strong id="carbsTotal">0g</strong></div><div><span>Fats</span><strong id="fatTotal">0g</strong></div></div></article>
+        <article class="meal-plan"><p class="eyebrow">WORKOUT-SPECIFIC PLAN</p><h3 id="planTitle">Upper body push</h3><div id="mealPlan" class="meal-list"></div></article>
+      </div>
+    </section>
+
+    <section id="history" class="view">
+      <div class="section-heading"><div><p class="eyebrow">YOUR JOURNEY</p><h2>Workout history</h2></div></div>
+      <div id="historyList" class="history-list"></div>
+    </section>
+  </main>
+
+  <div class="modal-backdrop" id="mealModal"><form class="modal" id="mealForm"><div class="modal-heading"><div><p class="eyebrow">NUTRITION</p><h2>Add a meal</h2></div><button type="button" class="close-button" data-close>×</button></div><label>Meal name<input name="name" required placeholder="Chicken rice bowl"></label><div class="form-row"><label>Calories<input name="calories" type="number" min="1" required></label><label>Protein (g)<input name="protein" type="number" min="0" required></label></div><div class="form-row"><label>Carbs (g)<input name="carbs" type="number" min="0" required></label><label>Fats (g)<input name="fat" type="number" min="0" required></label></div><button class="primary-button full" type="submit">Add meal</button></form></div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
